@@ -1,63 +1,141 @@
 
-
 const possibleResults = {
-    blueberry: 'You are a blueberry. Your unassuming exterior hides quite a personality!',
-    strawberry: 'You are a strawberry. It is your very purpose to be reliably delightful.',
-    watermelon: 'You are a watermelon. Anyone who gets past your tough outer shell will be refreshed by what\'s inside!',
+
+    dog: { // can be accessed like: possibleResults['dog'] or like: possibleResults.dog
+        pros: 'DOG PROS',
+        cons: 'DOG CONS',
+    },
+
+    cat: {
+        pros: 'CAT PROS',
+        cons: 'CAT CONS',
+    },
+
+    parrot: {
+        pros: 'PARROT PROS',
+        cons: 'PARROT CONS',
+    },
+
+    turtle: {
+        pros: 'TURTLE PROS',
+        cons: 'TURTLE CONS',
+    },
 };
 
 const scoreKeeper = { // Will be reset each time quiz begins
-    blueberry: 0,
-    strawberry: 0,
-    watermelon: 0,
+    dog: 0,
+    cat: 0,
+    parrot: 0,
+    turtle: 0,
 };
 
-const currentQuestion = 0; // Programming languages start counting at zero
+let currentQuestionIndex = 0; // Programming languages start counting at zero
 
 const questions = [
     {
-        text: 'What is your favorite color?',
+        text: 'What are you most likely to be doing at a party?',
         options: [
             {
-                text: 'Blue',
-                points: { blueberry: 2 },
+                text: 'Playing games and making new friends',
+                point: 'dog',
             },
             {
-                text: 'Red',
-                points: { strawberry: 1, watermelon: 1 },
+                text: 'Watching from a corner, hoping someone interesting shows up',
+                point: 'cat',
             },
             {
-                text: 'Green',
-                points: { watermelon: 2 },
+                text: 'Partying! Dressed up, chatting it up, dancing... maybe a little loud',
+                point: 'parrot',
             },
             {
-                text: 'Pink',
-                points: { strawberry: 2 },
+                text: 'I would help set up beforehand and make sure everything goes smoothly',
+                point: 'turtle',
             },
         ],
     },
     {
-        text: 'What is your favorite type of food?',
+        text: 'How would you prefer to unwind?',
         options: [
             {
-                text: 'Sour',
-                points: { blueberry: 2 },
+                text: 'Take a walk outside',
+                point: 'dog',
             },
             {
-                text: 'Sweet',
-                points: { strawberry: 1, watermelon: 1, blueberry: -1 },
+                text: 'Lie out in the sun',
+                point: 'cat',
             },
             {
-                text: 'Savory',
-                points: { blueberry: 1 },
+                text: 'Go window shopping',
+                point: 'parrot',
             },
             {
-                text: 'Salty',
-                points: { watermelon: 2 },
+                text: 'Sit at home and do nothing',
+                point: 'turtle',
+            },
+        ],
+    },
+    {
+        text: 'How do you deal with stress?',
+        options: [
+            {
+                text: 'Exercise',
+                point: 'dog',
             },
             {
-                text: 'Unagi',
-                points: { },
+                text: 'Tell someone off',
+                point: 'cat',
+            },
+            {
+                // inside a string, you have to escape quote marks with a \
+                text: 'Share how I\'m feeling',
+                point: 'parrot',
+            },
+            {
+                text: 'Have some alone time',
+                point: 'turtle',
+            },
+        ],
+    },
+    {
+        text: 'What sounds like the most fun to you?',
+        options: [
+            {
+                text: 'Playing sports or videogames with friends',
+                point: 'dog',
+            },
+            {
+                text: 'Reading a book',
+                point: 'cat',
+            },
+            {
+                text: 'Just hanging out and talking with friends',
+                point: 'parrot',
+            },
+            {
+                text: 'Making things, or cleaning the house',
+                point: 'turtle',
+            },
+        ],
+    },
+    {
+        text: 'What do you look for in a friend?',
+        options: [
+            {
+                text: 'Someone who is fun and energetic',
+                point: 'dog',
+            },
+            {
+                text: 'Someone who can be both quiet and playful',
+                point: 'cat',
+            },
+            {
+                text: 'Someone who I can share my secrets with',
+                point: 'parrot',
+            },
+            {
+                // inside a string, you have to escape quote marks with a \
+                text: 'Someone who doesn\'t have too many emotions',
+                point: 'turtle',
             },
         ],
     },
@@ -65,7 +143,7 @@ const questions = [
 
 function startQuiz() {
 
-    alert('quiz started!');
+    console.log('Quiz started!');
 
     // Reset score
     for (let result in scoreKeeper) {
@@ -88,27 +166,66 @@ function askQuestion(question) {
     questionP.innerText = question.text;
     quizZone.appendChild(questionP);
 
-    // create an unordered list to hold answers
-    let answerUl = document.createElement('ul');
-    quizZone.appendChild(answerUl);
+    // create box to hold answers
+    let answerDiv = document.createElement('div');
+    answerDiv.setAttribute('id', 'quizAnswers');
+    quizZone.appendChild(answerDiv);
 
     // render answers
-    question.options.forEach(option => {
+    question.options.forEach((option, i) => {
         // Create a list item for this option
-        let optionLi = document.createElement('li');
-        optionLi.innerText = option.text;
-        answerUl.appendChild(optionLi);
+        let optionDiv = document.createElement('div');
+        optionDiv.setAttribute('class', 'quizOption');
+        optionDiv.innerText = option.text;
+        answerDiv.appendChild(optionDiv);
+
+        // add data
+        optionDiv.index = i;
 
         // attach listeners
-        optionLi.onclick = () => alert('You clicked?');
+        optionDiv.onclick = acceptAnswer;
     });
 }
 
-function acceptAnswer(points) {
-    //
+function acceptAnswer(event) {
+    // Property we added ourselves
+    let selectedOptionIndex = event.target.index;
+    console.log({ selectedOptionIndex });
+
+    // Add point according to the question and option
+    let currentQuestion = questions[currentQuestionIndex];
+    let selectedOption = currentQuestion.options[selectedOptionIndex];
+    scoreKeeper[selectedOption.point]++;
+
+    console.log(JSON.stringify(scoreKeeper, null, 4));
+    
+    // Go to next question OR calculate result
+    currentQuestionIndex++;
+    if (currentQuestionIndex === questions.length) calculateResult();
+    else askQuestion(questions[currentQuestionIndex]);
+}
+
+function calculateResult() {
+    // Add up points, taking the FIRST/HIGHEST score
+    let quizResult = '';
+
+    let possibleResults = Object.keys(scoreKeeper);
+
+    for (let i = 0; i < possibleResults.length; i++) {
+        let thisPossibleResult = possibleResults[i];
+
+        if (!quizResult || scoreKeeper[quizResult] < scoreKeeper[thisPossibleResult]) {
+            quizResult = thisPossibleResult;
+        }
+    }
+
+    // Display result
+    showResult(quizResult);
 }
 
 // Display Results
 function showResult(result) {
     // based on answers
+
+    alert(result);
 }

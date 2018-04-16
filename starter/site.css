@@ -1,0 +1,35 @@
+body {
+    font-family: Calibri;
+    background: skyblue;
+}
+
+#quizContainer {
+    border-width: 5px;
+    border-style: solid;
+    border-color: #09f;
+    border-radius: 15px;
+    padding: 15px;
+    background: #fff;
+
+    min-width: 400px;
+    max-width: 800px;
+
+    /* causes this element to float in the middle of its parent */
+    margin: auto;
+
+    /* ONLY overrides margin-top ... other margins are same as declared above */
+    margin-top: 50px;
+}
+
+.quizOption {
+    cursor: pointer;
+    margin: 5px;
+    padding: 3px;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+
+.quizOption:hover {
+    color: #fff;
+    background: #333;
+}
