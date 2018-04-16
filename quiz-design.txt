@@ -13,7 +13,7 @@ Cat
 
 Parrot
     Pros: social, well-informed, great at fitting in.
-    Cons: vain, speaks before acting
+    Cons: vain, speaks before thinking
    
 Turtle
     Pros: good listener, resilient, dedicated and can see things through.

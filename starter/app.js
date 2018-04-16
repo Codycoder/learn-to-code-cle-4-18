@@ -1,27 +1,3 @@
-
-const possibleResults = {
-
-    dog: { // can be accessed like: possibleResults['dog'] or like: possibleResults.dog
-        pros: 'DOG PROS',
-        cons: 'DOG CONS',
-    },
-
-    cat: {
-        pros: 'CAT PROS',
-        cons: 'CAT CONS',
-    },
-
-    parrot: {
-        pros: 'PARROT PROS',
-        cons: 'PARROT CONS',
-    },
-
-    turtle: {
-        pros: 'TURTLE PROS',
-        cons: 'TURTLE CONS',
-    },
-};
-
 const scoreKeeper = { // Will be reset each time quiz begins
     dog: 0,
     cat: 0,
@@ -159,7 +135,9 @@ function askQuestion(question) {
 
     // clear quiz zone
     let quizZone = document.getElementById('quizZone');
-    while (quizZone.firstChild) quizZone.removeChild(quizZone.firstChild);
+    while (quizZone.firstChild) {
+        quizZone.removeChild(quizZone.firstChild);
+    }
 
     // render question
     let questionP = document.createElement('p');
@@ -201,8 +179,12 @@ function acceptAnswer(event) {
     
     // Go to next question OR calculate result
     currentQuestionIndex++;
-    if (currentQuestionIndex === questions.length) calculateResult();
-    else askQuestion(questions[currentQuestionIndex]);
+    if (currentQuestionIndex === questions.length) {
+        calculateResult();
+    }
+    else {
+        askQuestion(questions[currentQuestionIndex]);
+    }
 }
 
 function calculateResult() {
@@ -225,7 +207,15 @@ function calculateResult() {
 
 // Display Results
 function showResult(result) {
-    // based on answers
+    // Hide the quizZone (the quiz is over)
+    let quizZoneDiv = document.getElementById('quizZone');
+    quizZoneDiv.style.display = 'none'; // hide it by adjusting its style (CSS) directly
 
-    alert(result);
+    // Find the hidden <div> that contains the results
+    let resultDiv = document.getElementById('answer-' + result);
+    resultDiv.classList.toggle('hide'); // un-hide it by removing the '.hide' class
+
+    // Show the 'Take Again' button
+    let takeAgainButton = document.querySelector('#takeAgain');
+    takeAgainButton.style.display = 'inline'; // Just a regular inline element that flows in the text, like a word or phrase
 }

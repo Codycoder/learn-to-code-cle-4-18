@@ -33,3 +33,28 @@ body {
     color: #fff;
     background: #333;
 }
+
+.answer {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 1em;
+}
+
+.answer p::after {
+    content: ' ';
+    display: block;
+    clear: both;
+}
+
+.answer img {
+    float: left;
+    width: 300px;
+    height: auto;
+    
+    margin: 0 1em 1em 0;
+}
+
+.hide {
+    display: none;
+}
