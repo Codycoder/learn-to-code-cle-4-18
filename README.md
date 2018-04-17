@@ -10,6 +10,11 @@
 
 ---
 
+## Preparation
+* Set up a public GitHub repo with JUST the /starter directory so students can download it
+
+---
+
 `< 00:00`
 
 ## Before Students Arrive
@@ -26,8 +31,7 @@
 `00:00 - 00:10`
 
 ## Getting Started
-* Students download the project from GitHub and unzip it:
-    * TODO: Add link
+* Students download the project from GitHub and unzip it.
 * Instructor mentions Git and version control
 
 ---
