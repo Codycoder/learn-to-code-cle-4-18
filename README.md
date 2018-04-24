@@ -25,6 +25,7 @@
 ## As Students Arrive
 * Instructor greets students as they enter
 * Instructor suggests that students install Visual Studo Code if they don't already have a code editor
+* Installation URL https://code.visualstudio.com/download
 
 ---
 
@@ -32,6 +33,7 @@
 
 ## Getting Started
 * Students download the project from GitHub and unzip it.
+* https://github.com/WeCanCodeIT/learn-to-code
 * Instructor mentions Git and version control
 
 ---
