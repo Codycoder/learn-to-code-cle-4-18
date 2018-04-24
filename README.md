@@ -39,6 +39,7 @@
 ---
 
 ## Getting Excited
+* Studends browse to Starter folder
 * Students double click index.html to open it in their browser.
 * Students take the already-working personality quiz.
 
