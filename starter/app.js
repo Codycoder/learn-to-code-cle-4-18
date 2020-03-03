@@ -1,5 +1,6 @@
 // This keeps track of the number of questions the student has answered that match each result
 // It will be reset each time the quiz starts
+// keys used (hover over, value is number)
 const scoreKeeper = {
     dog: 0,
     cat: 0,
@@ -8,6 +9,7 @@ const scoreKeeper = {
 };
 
 let currentQuestionIndex = 0; // Programming languages start counting at zero
+// an array of objects
 
 // Questions can be added and modified freely
 // They just need to have the same structure
